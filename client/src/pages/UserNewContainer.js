@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
-import { ListUsersContext } from "../context/ListUsersContext";
-import { API } from "../config";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createUser } from "../actions/userActions";
 import UserNew from "./UserNew";
 
 const UserNewContainer = () => {
   const [username, setUsername] = useState("");
-  const { setGetUsers } = useContext(ListUsersContext);
+
+  const dispatch = useDispatch();
 
   const handleChange = (evt) => {
     setUsername(evt.target.value);
@@ -14,19 +15,10 @@ const UserNewContainer = () => {
   const handleSubmit = async (evt) => {
     try {
       evt.preventDefault();
+      const data = { username };
 
-      let config = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: username }),
-      };
-
-      await fetch(API, config);
+      dispatch(createUser(data));
       setUsername("");
-      setGetUsers(true);
     } catch (err) {
       console.error(err);
     }

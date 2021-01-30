@@ -1,21 +1,23 @@
 import React from "react";
+import { store } from "./store";
+import { Provider } from "react-redux";
+
 import UserNewContainer from "./pages/UserNewContainer";
 import ListUsersContainer from "./pages/ListUsersContainer";
-import { ListUsersProvider } from "./context/ListUsersContext";
-import SearchUser from "./pages/SearchUser";
 
 const App = () => (
-  <ListUsersProvider>
-    <div className="row mt-5">
-      <div className="col-md-4">
-        <UserNewContainer />
-        <SearchUser />
-      </div>
-      <div className="col-md-8">
-        <ListUsersContainer />
+  <Provider store={store}>
+    <div className="container">
+      <div className="row mt-5">
+        <div className="col-md-4">
+          <UserNewContainer />
+        </div>
+        <div className="col-md-8">
+          <ListUsersContainer />
+        </div>
       </div>
     </div>
-  </ListUsersProvider>
+  </Provider>
 );
 
 export default App;

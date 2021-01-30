@@ -1,26 +1,23 @@
-import { useContext } from "react";
-import { ListUsersContext } from "../context/ListUsersContext";
-import { API } from "../config";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
+import { getUsers, deleteUser } from "../actions/userActions";
+import { useSelector, useDispatch } from "react-redux";
 import ListUsers from "./ListUsers";
 
 const ListUsersContainer = () => {
-  const { users, setGetUsers } = useContext(ListUsersContext);
+  const dispatch = useDispatch();
 
-  const handleDelete = async (userId) => {
-    try {
-      const response = window.confirm("Quieres eliminar este usuario?");
-      if (response) {
-        await fetch(`${API}/${userId}`, {
-          method: "DELETE",
-        });
-        setGetUsers(true);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  useEffect(() => {
+    const getAllUsers = () => dispatch(getUsers());
 
-  const handleCopy = async (text) => {
+    getAllUsers();
+  }, []);
+
+  const users = useSelector((state) => state.users.users);
+
+  const handleDeleteUser = (userId) => dispatch(deleteUser(userId));
+
+  const handleCopyUserId = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
     } catch (err) {
@@ -31,8 +28,8 @@ const ListUsersContainer = () => {
   return (
     <ListUsers
       users={users}
-      handleDelete={handleDelete}
-      handleCopy={handleCopy}
+      handleCopy={handleCopyUserId}
+      handleDelete={handleDeleteUser}
     />
   );
 };
