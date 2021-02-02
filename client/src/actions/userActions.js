@@ -1,10 +1,10 @@
-import { API } from "../config";
+import { URI } from "../config";
 import { GET_USERS, CREATE_USER, DELETE_USER } from "../types";
 
 export const getUsers = () => {
   return async (dispatch) => {
     try {
-      const res = await fetch(API);
+      const res = await fetch(`${URI}/users`);
 
       const data = await res.json();
 
@@ -27,7 +27,7 @@ export const createUser = (data) => {
         body: JSON.stringify(data),
       };
 
-      const res = await fetch(API, config);
+      const res = await fetch(`${URI}/users`, config);
       const { user } = await res.json();
 
       dispatch({ type: CREATE_USER, payload: user });
@@ -42,7 +42,7 @@ export const deleteUser = (userId) => {
     try {
       const response = window.confirm("Quieres eliminar este usuario?");
       if (response) {
-        await fetch(`${API}/${userId}`, {
+        await fetch(`${URI}/users/${userId}`, {
           method: "DELETE",
         });
 

@@ -8,16 +8,13 @@ const UserNewContainer = () => {
 
   const dispatch = useDispatch();
 
-  const handleChange = (evt) => {
-    setUsername(evt.target.value);
-  };
+  const handleChange = (evt) => setUsername(evt.target.value);
 
-  const handleSubmit = async (evt) => {
+  const handleSubmit = (evt) => {
     try {
       evt.preventDefault();
-      const data = { username };
 
-      dispatch(createUser(data));
+      dispatch(createUser({ username }));
       setUsername("");
     } catch (err) {
       console.error(err);
