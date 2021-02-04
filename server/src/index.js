@@ -1,10 +1,15 @@
-require("dotenv").config();
-const app = require("./app");
-require("./database");
+import app from "./app";
+import { startConnection } from "./database";
 
-async function main() {
-  await app.listen(app.get("port"));
-  console.log(`Server on port ${app.get("port")}`);
-}
+const main = async () => {
+  try {
+    await startConnection();
+    app.listen(app.get("port"));
+
+    console.log(`Server on port ${app.get("port")}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 main();

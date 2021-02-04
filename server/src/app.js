@@ -1,15 +1,21 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+
+import { Config } from "./config";
+import userRoutes from "./routes/users";
+
 const app = express();
 
-// Configracion puerto del servidor
-app.set("port", process.env.PORT || 4000);
+// Server config
+app.set("port", Config.PORT);
 
-// Middelwares: Funciones que se ejecutan antes de llegar a las rutas
-app.use(cors()); // Permite enviar y recibir datos
-app.use(express.json()); // Especifica que se enviaran archivos con formato json
+// Middelewares
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
 
-// Rutas
-app.use("/api/users", require("./routes/users"));
+// Routes
+app.use("/api/users", userRoutes);
 
-module.exports = app;
+export default app;

@@ -1,18 +1,19 @@
-const mongoose = require("mongoose");
+import { connect } from "mongoose";
+import { Config } from "./config";
 
-const URI = process.env.MONGODB_URI
-  ? process.env.MONGODB_URI
-  : "mongodb://localhost/users-db";
+export const startConnection = async () => {
+  try {
+    const URI = Config.MONGODB_URI;
+    const connectOptions = {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    };
 
-connectOptions = {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
+    await connect(URI, connectOptions);
+    console.log("Database is connected!");
+  } catch (error) {
+    console.error(error);
+  }
 };
-
-mongoose.connect(URI, connectOptions);
-
-const connection = mongoose.connection;
-
-connection.once("open", () => console.log("DB is connected"));
