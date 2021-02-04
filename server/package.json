@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "build": "babel src/ --out-dir build",
+    "start": "npm run build && node build/index.js",
+    "dev": "nodemon --exec babel-node src/index.js"
+  },
   "dependencies": {
     "cors": "2.8.5",
     "dotenv": "8.2.0",
@@ -10,12 +18,12 @@
     "mongoose": "5.10.14"
   },
   "devDependencies": {
+    "@babel/cli": "7.12.13",
+    "@babel/core": "7.12.13",
+    "@babel/node": "7.12.13",
+    "@babel/preset-env": "7.12.13",
+    "@babel/register": "7.12.13",
+    "morgan": "1.10.0",
     "nodemon": "2.0.6"
-  },
-  "scripts": {
-    "dev": "nodemon src/index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
