@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user.models");
 
 // Funcion que nos permite ver los usuarios registrados
 export const getUsers = async (req, res) => {

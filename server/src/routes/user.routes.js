@@ -6,7 +6,7 @@ import {
   getUsers,
   createUser,
   deleteUser,
-} from "../controllers/users.controller";
+} from "../controllers/user.controller";
 
 router.route("/").get(getUsers).post(createUser);
 
