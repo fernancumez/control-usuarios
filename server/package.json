@@ -8,8 +8,8 @@
   "license": "ISC",
   "scripts": {
     "build": "babel src/ --out-dir build",
-    "start": "npm run build && node build/index.js",
-    "dev": "nodemon --exec babel-node src/index.js"
+    "start": "export || SET NODE_ENV=production&& npm run build && node build/index.js",
+    "dev": "export || SET NODE_ENV=development&& nodemon --exec babel-node src/index.js"
   },
   "dependencies": {
     "cors": "2.8.5",
