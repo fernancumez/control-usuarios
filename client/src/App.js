@@ -2,8 +2,8 @@ import React from "react";
 import { store } from "./store";
 import { Provider } from "react-redux";
 
-import UserNewContainer from "./pages/UserNewContainer";
-import ListUsersContainer from "./pages/ListUsersContainer";
+import UserNewContainer from "./views/UserNewContainer";
+import ListUsersContainer from "./views/ListUsersContainer";
 
 const App = () => (
   <Provider store={store}>
